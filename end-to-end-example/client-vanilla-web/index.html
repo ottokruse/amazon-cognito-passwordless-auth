@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/touch-small.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Passwordless demo</title>
+    <script type="module" crossorigin src="/index.js" async></script>
+  </head>
+  <body>
+    <form id="sign-in-form">
+      <input type="text" placeholder="e-mail address" name="username" />
+      <input type="submit" value="Request sign-in link" />
+    </form>
+    <script>
+      const form = document.getElementById("sign-in-form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        requestSignInLink({
+          usernameOrAlias: event.target.username.value,
+        });
+      });
+    </script>
+  </body>
+</html>
