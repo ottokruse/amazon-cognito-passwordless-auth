@@ -300,7 +300,19 @@ async function continueSession({
   });
 }
 
-export const signInWithLink = (props?: {
+let signingInWithLink: ReturnType<typeof _signInWithLink> | undefined =
+  undefined;
+export async function signInWithLink(
+  ...args: Parameters<typeof _signInWithLink>
+) {
+  if (!signingInWithLink) {
+    signingInWithLink = _signInWithLink(...args);
+    signingInWithLink.signedIn.finally(() => (signingInWithLink = undefined));
+  }
+  return signingInWithLink;
+}
+
+const _signInWithLink = (props?: {
   session?: Session;
   tokensCb?: (tokens: TokensFromSignIn) => void | Promise<void>;
   statusCb?: (status: BusyState | IdleState) => void;
