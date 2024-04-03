@@ -62,9 +62,9 @@ export async function fido2CreateCredential({
     },
     attestation: fido2?.attestation,
     authenticatorSelection:
-      publicKeyOptions.authenticatorSelection ?? fido2?.authenticatorSelection,
+      fido2?.authenticatorSelection ?? publicKeyOptions.authenticatorSelection,
     extensions: fido2?.extensions,
-    timeout: publicKeyOptions.timeout ?? fido2?.timeout,
+    timeout: fido2?.timeout ?? publicKeyOptions.timeout,
     challenge: bufferFromBase64Url(publicKeyOptions.challenge),
     user: {
       ...publicKeyOptions.user,
